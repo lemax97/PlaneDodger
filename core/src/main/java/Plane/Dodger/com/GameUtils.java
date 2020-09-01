@@ -27,4 +27,23 @@ public class GameUtils {
         Array<TextureRegion> framesArray = new Array<TextureRegion>(frames);
         return new Animation(frameDuration, framesArray, mode);
     }
+
+   // creates an Animation from a set of image files
+   // name format: fileNamePrefix + N + fileNameSuffix, where
+   // 0 <= N <= frameCount
+
+   public static Animation parseImageFiles(String fileNamePrefix, String fileNameSuffix,
+                                           int frameCount, float frameDuration, Animation.PlayMode mode){
+        TextureRegion[] frames = new TextureRegion[frameCount];
+
+       for (int n = 0; n < frameCount; n++) {
+           String fileName = fileNamePrefix + n + fileNameSuffix;
+           Texture texture = new Texture(fileName);
+           texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+           frames[n] = new TextureRegion(texture);
+       }
+
+       Array<TextureRegion> framesArray = new Array<TextureRegion>(frames);
+       return new Animation(frameDuration, framesArray, mode);
+   }
 }
